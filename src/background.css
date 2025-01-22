@@ -1,0 +1,16 @@
+.background {
+    /* Gradien dengan warna coklat */
+    background: linear-gradient(
+        rgba(139, 69, 19, 0.6), /* Coklat transparan */
+        rgba(139, 69, 19, 0.8) /* Coklat lebih pekat */
+      ),
+      /* Gambar latar belakang */
+      url('https://idebiz.id/wp-content/uploads/2024/01/Memimpin-Event-dengan-Baik-Pelatihan-EO-Terkemuka.jpg') no-repeat center center fixed;
+    
+    /* Menyusun gambar agar memenuhi seluruh elemen */
+    background-size: cover;
+    
+    /* Mengatur tinggi halaman penuh (100% dari tinggi layar) */
+    height: 100vh;
+  }
+  
