@@ -22,7 +22,7 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/event"); // Ganti dengan endpoint yang sesuai
+        const response = await axios.get("acceptable-fulfillment-production.up.railway.app/event"); // Ganti dengan endpoint yang sesuai
         setEvents(response.data);
       } catch (error) {
         console.error("Gagal mengambil data event", error);
@@ -63,7 +63,7 @@ const AdminPage = () => {
     try {
       if (editingEvent) {
         // Update event yang sudah ada
-        await axios.put(`http://localhost:5000/event/${editingEvent.id}`, {
+        await axios.put(`acceptable-fulfillment-production.up.railway.app/event/${editingEvent.id}`, {
           name,
           date,
           location,
@@ -73,7 +73,7 @@ const AdminPage = () => {
         setSuccessMsg("Event berhasil diperbarui");
       } else {
         // Tambah event baru
-        await axios.post("http://localhost:5000/event", {
+        await axios.post("acceptable-fulfillment-production.up.railway.app/event", {
           name,
           date,
           location,
@@ -110,7 +110,7 @@ const AdminPage = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/event/${eventToDelete}`);
+      await axios.delete(`acceptable-fulfillment-production.up.railway.app/event/${eventToDelete}`);
       setEvents(events.filter((event) => event.id !== eventToDelete)); // Menghapus event dari daftar
       setShowModal(false); // Menutup modal setelah event dihapus
     } catch (error) {

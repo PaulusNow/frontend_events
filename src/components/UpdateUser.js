@@ -18,7 +18,7 @@ const UpdateUser = () => {
     useEffect(() => {
         const refreshToken = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/token");
+                const response = await axios.get("acceptable-fulfillment-production.up.railway.app/token");
                 setToken(response.data.accessToken);
             } catch (error) {
                 if (error.response) {
@@ -34,7 +34,7 @@ const UpdateUser = () => {
         const fetchUserData = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:5000/users/${id}`,
+                    `acceptable-fulfillment-production.up.railway.app/users/${id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ const UpdateUser = () => {
             }
 
             await axios.put(
-                `http://localhost:5000/users/${id}`,
+                `acceptable-fulfillment-production.up.railway.app/users/${id}`,
                 data,
                 {
                     headers: {

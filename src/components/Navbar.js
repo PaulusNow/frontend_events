@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/token");
+      const response = await axios.get("acceptable-fulfillment-production.up.railway.app/token");
       setToken(response.data.accessToken);
       const decoded = jwtDecode(response.data.accessToken);
       setName(decoded.name);
@@ -31,7 +31,7 @@ const Navbar = () => {
 
   const Logout = async () => {
     try {
-      await axios.delete("http://localhost:5000/logout");
+      await axios.delete("acceptable-fulfillment-production.up.railway.app/logout");
       navigate("/");
     } catch (error) {
       console.log(error);
