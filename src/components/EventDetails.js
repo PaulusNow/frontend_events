@@ -1,42 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import io from 'socket.io-client';
-
-const socket = io('http://localhost:5000'); // Connect to the Socket.IO server
 
 function EventDetails() {
-  const [bookings, setBookings] = useState([]);
-
-  useEffect(() => {
-    // Listen for booking updates
-    socket.on('bookingUpdated', (data) => {
-      console.log(data.message);
-      // Update the bookings state or fetch the latest bookings
-      fetchBookings();
-    });
-
-    // Cleanup on unmount
-    return () => {
-      socket.off('bookingUpdated');
-    };
-  }, []);
-
-  const fetchBookings = async () => {
-    const response = await fetch('/api/bookings'); // Adjust the endpoint as necessary
-    const data = await response.json();
-    setBookings(data);
-  };
-
-  const handleBooking = async () => {
-    const bookingData = { /* Your booking data here */ };
-    await fetch('/api/bookings', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(bookingData),
-    });
-  };
-
   return (
     <div>
       <div className="container mt-5">
