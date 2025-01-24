@@ -1,7 +1,10 @@
-import Dashboard from "./components/Dashboard";
+import AdminPage from "./components/AdminPage";
+import EventDetails from "./components/EventDetails";
+import Home from "./components/Home";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
+import UpdateUser from "./components/UpdateUser";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -11,11 +14,38 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route 
-          path="/dashboard" 
+          path="/home" 
           element={
             <>
               <Navbar />
-              <Dashboard />
+              <Home />
+            </>
+          } 
+        />
+        <Route 
+          path="/events" 
+          element={
+            <>
+              <Navbar />
+              <EventDetails />
+            </>
+          } 
+        />
+        <Route 
+          path="/update/:id" 
+          element={
+            <>
+              <Navbar />
+              <UpdateUser />
+            </>
+          } 
+        />
+        <Route 
+          path="/admin" 
+          element={
+            <>
+              <Navbar />
+              <AdminPage />
             </>
           } 
         />

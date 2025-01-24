@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode"; // Perbaiki import
-import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode"; // Perbaikan import
+import { useNavigate, Link } from "react-router-dom";
 
 const Navbar = () => {
   const [name, setName] = useState("");
+  const [id, setId] = useState(""); // Tambahkan state untuk ID user
   const [token, setToken] = useState("");
-  const [expire, setExpire] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false); // Tambahkan state untuk is_admin
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +20,8 @@ const Navbar = () => {
       setToken(response.data.accessToken);
       const decoded = jwtDecode(response.data.accessToken);
       setName(decoded.name);
-      setExpire(decoded.exp);
+      setId(decoded.userId); // Ambil ID user dari token
+      setIsAdmin(decoded.isAdmin === true); // Cek apakah user admin
     } catch (error) {
       if (error.response) {
         navigate("/");
@@ -39,9 +41,9 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand">
           Event Mania
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -56,10 +58,17 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/">
+              <Link className="nav-link active" aria-current="page" to="/home">
                 Home
-              </a>
+              </Link>
             </li>
+            {isAdmin && ( // Tampilkan menu Admin jika isAdmin true
+              <li className="nav-item">
+                <Link className="nav-link" to="/admin">
+                  Halaman Admin
+                </Link>
+              </li>
+            )}
           </ul>
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item dropdown">
@@ -70,23 +79,38 @@ const Navbar = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Welcome, {name ? name : "Guest"}{" "}
-                {/* Menampilkan nama pengguna jika tersedia */}
+                Welcome, {name ? name : "Guest"}
               </a>
               <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Daftar Event
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <button className="dropdown-item" onClick={Logout}>
-                    Log Out
-                  </button>
-                </li>
+                {token && (
+                  <>
+                    <li>
+                      <Link className="dropdown-item" to={`/update/${id}`}>
+                        Edit Profil
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/events">
+                        Daftar Event
+                      </Link>
+                    </li>
+                    <li>
+                      <hr className="dropdown-divider" />
+                    </li>
+                    <li>
+                      <button className="dropdown-item" onClick={Logout}>
+                        Log Out
+                      </button>
+                    </li>
+                  </>
+                )}
+                {!token && (
+                  <li>
+                    <Link className="dropdown-item" to="/login">
+                      Log In
+                    </Link>
+                  </li>
+                )}
               </ul>
             </li>
           </ul>

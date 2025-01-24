@@ -18,7 +18,7 @@ const Login = () => {
             username: username,
             password: password,
           });
-          navigate('/dashboard'); 
+          navigate('/home'); 
         } catch (error) {
           if (error.response) {
             console.log(error.response.data.Message);
