@@ -14,7 +14,7 @@ const Home = () => {
     // Fungsi untuk mendapatkan token dan mendekode informasi pengguna
     const getUserInfo = async () => {
       try {
-        const response = await axios.get("acceptable-fulfillment-production.up.railway.app/token");
+        const response = await axios.get("https://frontend-events-git-main-paulus-projects-83145979.vercel.app/token");
         setToken(response.data.accessToken);
         const decoded = jwtDecode(response.data.accessToken);
         setId(decoded.userId);
@@ -40,7 +40,7 @@ const Home = () => {
         const quantity = 1;
     
         const response = await axios.post(
-          'acceptable-fulfillment-production.up.railway.app/booking',
+          'https://frontend-events-git-main-paulus-projects-83145979.vercel.app',
           { eventId, userId: id, quantity }, // Gunakan ID yang diambil dari token
           {
             headers: {
@@ -62,7 +62,7 @@ const Home = () => {
     useEffect(() => {
       const fetchEvents = async () => {
         try {
-          const response = await axios.get('acceptable-fulfillment-production.up.railway.app/event');
+          const response = await axios.get('https://frontend-events-git-main-paulus-projects-83145979.vercel.app');
           setEvents(response.data);
           setLoading(false);
         } catch (error) {
@@ -73,22 +73,7 @@ const Home = () => {
     
       fetchEvents();
     
-      // Remove WebSocket listener
-      // socket.on('ticketUpdated', (data) => {
-      //     setEvents((prevEvents) => 
-      //         prevEvents.map(event => 
-      //             event.id === data.eventId 
-      //             ? { ...event, ticketsAvailable: data.ticketsAvailable } 
-      //             : event
-      //         )
-      //     );
-      // });
-    
-      // Cleanup saat komponen dibersihkan
-      // return () => {
-      //     socket.off('ticketUpdated');
-      // };
-    }, []);  // Hanya sekali render saat mount
+    }, []); 
 
     if (loading) {
         return <div>Loading...</div>;

@@ -18,7 +18,7 @@ const UpdateUser = () => {
     useEffect(() => {
         const refreshToken = async () => {
             try {
-                const response = await axios.get("acceptable-fulfillment-production.up.railway.app/token");
+                const response = await axios.get("https://frontend-events-git-main-paulus-projects-83145979.vercel.app/token");
                 setToken(response.data.accessToken);
             } catch (error) {
                 if (error.response) {
@@ -34,7 +34,7 @@ const UpdateUser = () => {
         const fetchUserData = async () => {
             try {
                 const response = await axios.get(
-                    `acceptable-fulfillment-production.up.railway.app/users/${id}`,
+                    `https://frontend-events-git-main-paulus-projects-83145979.vercel.app/users/${id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ const UpdateUser = () => {
             }
 
             await axios.put(
-                `acceptable-fulfillment-production.up.railway.app/users/${id}`,
+                `https://frontend-events-git-main-paulus-projects-83145979.vercel.app/users/${id}`,
                 data,
                 {
                     headers: {

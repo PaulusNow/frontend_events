@@ -15,7 +15,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('acceptable-fulfillment-production.up.railway.app/users', {
+      await axios.post('https://frontend-events-git-main-paulus-projects-83145979.vercel.app/users', {
         name: name,
         username: username,
         password: password,
