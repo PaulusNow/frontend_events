@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("https://frontend-events-git-main-paulus-projects-83145979.vercel.app/token");
+      const response = await axios.get("https://acceptable-fulfillment-production.up.railway.app/token");
       setToken(response.data.accessToken);
       const decoded = jwtDecode(response.data.accessToken);
       setName(decoded.name);
@@ -31,7 +31,7 @@ const Navbar = () => {
 
   const Logout = async () => {
     try {
-      await axios.delete("https://frontend-events-git-main-paulus-projects-83145979.vercel.app/logout");
+      await axios.delete("https://acceptable-fulfillment-production.up.railway.app/logout");
       navigate("/");
     } catch (error) {
       console.log(error);

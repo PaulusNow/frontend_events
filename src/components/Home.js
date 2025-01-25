@@ -14,7 +14,7 @@ const Home = () => {
     // Fungsi untuk mendapatkan token dan mendekode informasi pengguna
     const getUserInfo = async () => {
       try {
-        const response = await axios.get("https://frontend-events-git-main-paulus-projects-83145979.vercel.app/token");
+        const response = await axios.get("https://acceptable-fulfillment-production.up.railway.app/token");
         setToken(response.data.accessToken);
         const decoded = jwtDecode(response.data.accessToken);
         setId(decoded.userId);
@@ -40,7 +40,7 @@ const Home = () => {
         const quantity = 1;
     
         const response = await axios.post(
-          'https://frontend-events-git-main-paulus-projects-83145979.vercel.app',
+          'https://acceptable-fulfillment-production.up.railway.app',
           { eventId, userId: id, quantity }, // Gunakan ID yang diambil dari token
           {
             headers: {
@@ -62,7 +62,7 @@ const Home = () => {
     useEffect(() => {
       const fetchEvents = async () => {
         try {
-          const response = await axios.get('https://frontend-events-git-main-paulus-projects-83145979.vercel.app');
+          const response = await axios.get('https://acceptable-fulfillment-production.up.railway.app');
           setEvents(response.data);
           setLoading(false);
         } catch (error) {
