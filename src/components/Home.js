@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import io from 'socket.io-client';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
-
-const socket = io('http://localhost:5000'); // Inisialisasi koneksi socket
 
 const Home = () => {
     const [id, setId] = useState(""); // ID dinamis
@@ -55,8 +52,6 @@ const Home = () => {
         // Mengupdate state events setelah berhasil booking
         alert('Pendaftaran event berhasil!');
         
-      // The server will handle broadcasting the ticket update
-        
       } catch (error) {
         console.error(error);
         alert('Gagal mendaftar event.');
@@ -78,21 +73,21 @@ const Home = () => {
     
       fetchEvents();
     
-      // Mendengarkan event 'ticketUpdated' yang dikirim dari server
-      socket.on('ticketUpdated', (data) => {
-        setEvents((prevEvents) => 
-          prevEvents.map(event => 
-            event.id === data.eventId 
-            ? { ...event, ticketsAvailable: data.ticketsAvailable } 
-            : event
-          )
-        );
-      });
+      // Remove WebSocket listener
+      // socket.on('ticketUpdated', (data) => {
+      //     setEvents((prevEvents) => 
+      //         prevEvents.map(event => 
+      //             event.id === data.eventId 
+      //             ? { ...event, ticketsAvailable: data.ticketsAvailable } 
+      //             : event
+      //         )
+      //     );
+      // });
     
       // Cleanup saat komponen dibersihkan
-      return () => {
-        socket.off('ticketUpdated');
-      };
+      // return () => {
+      //     socket.off('ticketUpdated');
+      // };
     }, []);  // Hanya sekali render saat mount
 
     if (loading) {
