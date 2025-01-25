@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get("https://acceptable-fulfillment-production.up.railway.app/token");
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/token`);
       setToken(response.data.accessToken);
       const decoded = jwtDecode(response.data.accessToken);
       setName(decoded.name);
@@ -31,7 +31,7 @@ const Navbar = () => {
 
   const Logout = async () => {
     try {
-      await axios.delete("https://acceptable-fulfillment-production.up.railway.app/logout");
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/logout`);
       navigate("/");
     } catch (error) {
       console.log(error);

@@ -14,7 +14,7 @@ const Login = () => {
     const Auth = async (e) => {
         e.preventDefault();
         try {
-          await axios.post('https://acceptable-fulfillment-production.up.railway.app/login', {
+          await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
             username: username,
             password: password,
           });

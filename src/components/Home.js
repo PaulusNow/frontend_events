@@ -14,7 +14,7 @@ const Home = () => {
     // Fungsi untuk mendapatkan token dan mendekode informasi pengguna
     const getUserInfo = async () => {
       try {
-        const response = await axios.get("https://acceptable-fulfillment-production.up.railway.app/token");
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/token`);
         setToken(response.data.accessToken);
         const decoded = jwtDecode(response.data.accessToken);
         setId(decoded.userId);
@@ -40,7 +40,7 @@ const Home = () => {
         const quantity = 1;
     
         const response = await axios.post(
-          'https://acceptable-fulfillment-production.up.railway.app',
+          `${process.env.REACT_APP_BACKEND_URL}`,
           { eventId, userId: id, quantity }, // Gunakan ID yang diambil dari token
           {
             headers: {
@@ -62,7 +62,7 @@ const Home = () => {
     useEffect(() => {
       const fetchEvents = async () => {
         try {
-          const response = await axios.get('https://acceptable-fulfillment-production.up.railway.app');
+          const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}`);
           setEvents(response.data);
           setLoading(false);
         } catch (error) {
